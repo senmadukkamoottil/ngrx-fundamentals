@@ -7,10 +7,9 @@
     <app-products-list
       [total]="total"
       [products]="products"
-      [showProductCode]="showProductCode"
+      [showProductCode]="showProductCode$ | async"
       (toggleProductCode)="toggleShowProductCode()"
     ></app-products-list>
   </div>
 </div>
-
 <ng-template #loadingElement>Loading...</ng-template>
