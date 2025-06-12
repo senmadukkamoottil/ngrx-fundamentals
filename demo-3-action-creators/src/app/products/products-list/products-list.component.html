@@ -11,7 +11,7 @@
         <div>{{ product.name }}</div>
         <div>
           {{ product.price | currency }}
-          <ng-container *ngIf="showProductCode">
+          <ng-container *ngIf="(showProductCode$ | async) === true">
             Product Code: {{ product.id }}
           </ng-container>
         </div>
@@ -23,13 +23,13 @@
       </div>
     </li>
     <li>
-      Total: {{ this.total | currency }}
+      Total: {{ total$ | async | currency }}
       <div>
         <input
           id="showProductCode"
           type="checkbox"
           (change)="toggleProductCode.emit()"
-          [checked]="showProductCode"
+          [checked]="(showProductCode$ | async) === true"
         />
         <label for="showProductCode">Show Product Code</label>
       </div>
