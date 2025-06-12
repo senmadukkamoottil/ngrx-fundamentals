@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
+import { Store } from '@ngrx/store';
+import { ProductPageAction } from '../state/products.actions';
 
 @Component({
   selector: 'app-product-page',
@@ -15,7 +17,8 @@ export class ProductPageComponent {
   constructor(
     private productsService: ProductsService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private store: Store<Product[]>
   ) {}
 
   ngOnInit() {

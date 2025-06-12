@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { sumProducts } from 'src/app/utils/sum-products';
 import { Product } from '../product.model';
 import { ProductsService } from '../products.service';
+import { ProductPageAction, ProductsAPIActions } from '../state/products.actions';
 
 @Component({
   selector: 'app-products-page',
@@ -10,9 +11,9 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./products-page.component.css'],
 })
 export class ProductsPageComponent {
-  products: Product[] = [];
+  products$ = this.store.select( (state: any) => state.products.products);
   total = 0;
-  loading = true;
+  loading$ = this.store.select((state: any) => state.products.loading);
   showProductCode$ = this.store.select(
     (state: any) => state.products.showProductCode
   );
@@ -26,11 +27,13 @@ export class ProductsPageComponent {
   }
 
   getProducts() {
+    this.store.dispatch(ProductPageAction.loadProducts());
     this.productsService.getAll().subscribe({
       next: (products) => {
-        this.products = products;
+        this.products$ = this.store.select( (state: any) => state.products.products);
         this.total = sumProducts(products);
-        this.loading = false;
+        this.loading$ = this.store.select((state: any) => state.products.loading);
+        this.store.dispatch(ProductsAPIActions.productsLoadedSuccess({products}));
       },
       error: (error) => (this.errorMessage = error),
     });
