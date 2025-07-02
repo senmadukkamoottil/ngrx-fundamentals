@@ -5,7 +5,6 @@ import {
   ProductsAPIActions,
   ProductsPageActions,
 } from '../state/products.actions';
-import { productsLoading, selectProducts } from '../state/products.selectors';
 
 @Component({
   selector: 'app-products-page',
@@ -13,8 +12,9 @@ import { productsLoading, selectProducts } from '../state/products.selectors';
   styleUrls: ['./products-page.component.css'],
 })
 export class ProductsPageComponent {
-  products$ = this.store.select(selectProducts);
-  loading$ = this.store.select(productsLoading);
+  products$ = this.store.select((state: any) => state.products.products);
+  total = 0;
+  loading$ = this.store.select((state: any) => state.products.loading);
   showProductCode$ = this.store.select(
     (state: any) => state.products.showProductCode
   );

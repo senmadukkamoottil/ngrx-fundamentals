@@ -6,8 +6,6 @@ import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductPageComponent } from './product-page/product-page.component';
-import { StoreModule } from '@ngrx/store';
-import { toggleProductCodeReducer } from './store/products.reducer';
 
 @NgModule({
   declarations: [
@@ -19,8 +17,7 @@ import { toggleProductCodeReducer } from './store/products.reducer';
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    ReactiveFormsModule,
-    StoreModule.forFeature('products', toggleProductCodeReducer)
+    ReactiveFormsModule
   ]
 })
 export class ProductsModule { }
