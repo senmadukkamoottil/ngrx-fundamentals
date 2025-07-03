@@ -7,7 +7,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { StoreModule } from '@ngrx/store';
-import { productsReducer } from './state/products.reducer';
+import { ToggleProductCodeReducers } from './state/products.reducers';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { productsReducer } from './state/products.reducer';
     CommonModule,
     ProductsRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('products', productsReducer),
+    StoreModule.forFeature('products', ToggleProductCodeReducers)
   ],
 })
 export class ProductsModule {}

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../product.model';
+import { Store } from '@ngrx/store';
+import { ToggleCodeActions } from '../state/products.actions';
 
 @Component({
   selector: 'app-products-list',
@@ -9,6 +11,16 @@ import { Product } from '../product.model';
 export class ProductsListComponent {
   @Input() products: Product[] = [];
   @Input() total = 0;
-  @Input() showProductCode = false;
-  @Output() toggleProductCode = new EventEmitter<void>();
+  // showProductCode = false;
+  showProductCode$ = this.store.select((state: any) => {
+    return state.products.showProductCode
+  });
+
+  constructor(private store: Store<Product>) {
+
+  }
+
+  toggleProductCode() {
+    this.store.dispatch(ToggleCodeActions())
+  }
 }
